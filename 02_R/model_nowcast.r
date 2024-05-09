@@ -52,7 +52,8 @@ dbReadTable(conn, "tb_srag_st")
 #4 - segunda forma de obter dataframe com consulta
 r_query <- dbSendQuery(conn, 
                        "SELECT dt_sin_pri, dt_digita 
-                       FROM tb_srag_st;")
+                       FROM tb_srag_st
+                       WHERE dt_sin_pri >= '2022-08-01' AND dt_sin_pri <= '2022-12-31';")
 
 
 # Transforma a query em um data.frame
@@ -86,7 +87,7 @@ serie_semana <- dados |>
          dt_event = aweek::get_date(semana_epi, ano_epi, start = 7)) |>
   group_by(dt_event) |>
   count() |>
-  dplyr::filter(dt_event >= '2021-07-04' ) # usando dado da semana 26/2021
+  dplyr::filter(dt_event >= '2021-01-01' ) # usando dado da semana 26/2021
 
 
 

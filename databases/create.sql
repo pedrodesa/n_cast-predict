@@ -11,9 +11,11 @@ CREATE TABLE IF NOT EXISTS tb_srag_st (
 	dt_sin_pri DATE NULL,
 	dt_digita DATE NULL,
 	classi_fin INTEGER NULL,
-	co_mun_res5 VARCHAR(5) NULL,
+    evolucao INTEGER NULL,
+	co_mun_res VARCHAR(5) NULL,
 	sg_uf CHAR(2) NULL,
-	co_mun_res7 VARCHAR(7) NULL,
+	co_mun_not VARCHAR(7) NULL,
+    sg_uf_not CHAR(2) NULL,
 	idade_nasc INT NULL
 );
 

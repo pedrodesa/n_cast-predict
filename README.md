@@ -6,3 +6,4 @@ Gerar predições de atrasos de registros de vigilância em saúde, para antecip
 
 ![Diagrama](./relatorios/img/diagrama.jpg)
 
+<img title="Diagrama" alt="Alt text" src="./relatorios/img/diagrama.jpg">

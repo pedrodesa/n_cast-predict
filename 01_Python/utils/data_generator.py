@@ -15,12 +15,12 @@ def gerar_dados():
     data = {
         'dataSintomas': [
             faker.date_between_dates(
-                date_start = pd.to_datetime('2023-01-01'),
-                date_end = pd.to_datetime('2023-04-30')
+                date_start=pd.to_datetime('2023-01-01'),
+                date_end=pd.to_datetime('2023-04-30'),
             )
             for _ in range(10)
         ],
-        'idade': [round(random.uniform(18, 65), 2) for _ in range(10)]
+        'idade': [round(random.uniform(18, 65), 2) for _ in range(10)],
     }
 
     df = pd.DataFrame(data)

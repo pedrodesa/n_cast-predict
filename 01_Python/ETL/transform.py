@@ -1,16 +1,16 @@
-""" Módulo com todos os tratamentos necessários para consilidar os dados de entrada """
+from datetime import datetime
 
 import pandas as pd
 
 
-def converter_para_data(df, colunas, formato = None):
+def converter_para_datas(df, colunas, formato=None):
     """
     Converte colunas do tipo string para o tipo data.
 
     type: datetime64[ns]
     """
     for coluna in colunas:
-        df[coluna] = pd.to_datetime(df[coluna], format = formato)
+        df[coluna] = df[coluna].apply(lambda x: datetime.strptime(x, formato))
 
     return df
 
@@ -25,4 +25,4 @@ def renomear_colunas(df, colunas):
         são as colunas atuais e os valores são os
         novos nomes.
     """
-    return df.rename(columns = colunas)
+    return df.rename(columns=colunas)

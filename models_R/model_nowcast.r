@@ -78,8 +78,10 @@ dbDisconnect(conn)
 
 
 # 3.0 TRANSFORMAR VARIÁVEIS ---
-dados$dt_sin_pri <- as.Date(dados$dt_sin_pri)
-dados$dt_digita <- as.Date(dados$dt_digita)
+dados$dt_sin_pri <- dmy(dados$dt_sin_pri)
+dados$dt_digita <- dmy(dados$dt_digita)
+
+
 
 
 # 4.0 NOWCASTING ---
@@ -98,7 +100,7 @@ serie_semana <- dados |>
          dt_event = aweek::get_date(semana_epi, ano_epi, start = 7)) |>
   group_by(dt_event) |>
   count() |>
-  dplyr::filter(dt_event >= '2021-01-01' ) # usando dado da semana 26/2021
+  dplyr::filter(dt_event >= '2023-01-01' ) # usando dado da semana 26/2021
 
 
 # 6.0 VISUALIZAÇÃO DO NOWCASTING

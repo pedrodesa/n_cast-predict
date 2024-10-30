@@ -55,5 +55,7 @@ def inserir_dados_no_postgres(conn, data, nome_tabela):
         )
         data.to_sql(nome_tabela, engine, if_exists='replace', index=False)
         print('Dados inseridos na tabela com sucesso!')
+
     except Exception as error:
+
         print(f'Erro ao inserir dados no PostgresSQL: {error}')

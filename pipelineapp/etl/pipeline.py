@@ -1,11 +1,11 @@
 """Módulo de execução do pipeline."""
 
 # RUN COMMAND ---
-# python 01_Python/ETL/pipeline.py
+# python pipelineapp/etl/pipeline.py
 
-from .extract import ler_arquivo
-from .load import conectar_db, inserir_dados_no_postgres
-from .transform import converter_para_datas
+from extract import ler_arquivo
+from load import conectar_db, inserir_dados_no_postgres
+from transform import converter_para_datas
 
 
 def executar_pipeline():
@@ -26,7 +26,7 @@ def executar_pipeline():
     # dados = renomear_colunas(dados, novos_nomes)
 
     # Exportar dados para o PostgreSQL
-    nome_tabela = 'tb_srag_st'
+    nome_tabela = 'tb_covid'
 
     # Conecta-se ao PostgreSQL
     conn = conectar_db()

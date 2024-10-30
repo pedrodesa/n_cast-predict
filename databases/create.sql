@@ -7,7 +7,7 @@ CREATE DATABASE IF NOT EXISTS bd_cnie;
 -- TABELAS
 
 -- Tabela de dados brutos de SRAG
-CREATE TABLE IF NOT EXISTS tb_srag_st (
+CREATE TABLE IF NOT EXISTS tb_covid (
 	dt_sin_pri DATE NULL,
 	dt_digita DATE NULL,
 	classi_fin INTEGER NULL,

@@ -1,9 +1,9 @@
 """Módulo para o pipeline de dados."""
 
-from pipelineapp.etl import pipeline
+from etl import pipeline
 
 # RUN COMMAND ---
-# python 01_Python/main.py
+# python pipelineapp/main.py
 
 
 def main():

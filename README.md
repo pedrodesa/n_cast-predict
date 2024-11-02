@@ -36,3 +36,4 @@ python app_/pipelineapp/main.py
 uvicorn app_.app:app --reload
 ```
 
+Para parar a execução do web app use Ctrl + C

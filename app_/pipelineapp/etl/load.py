@@ -28,8 +28,8 @@ def conectar_db():
         conn = psycopg2.connect(
             host=os.getenv('DB_HOST'),
             database=os.getenv('DATABASE'),
-            user=os.getenv('POSTGRES_USER'),
-            password=os.getenv('POSTGRES_PASSWORD'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD'),
             port=os.getenv('DB_PORT'),
         )
 
@@ -51,7 +51,7 @@ def inserir_dados_no_postgres(conn, data, nome_tabela):
     """
     try:
         engine = create_engine(
-            f'postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("DB_HOST")}/{os.getenv("DATABASE")}'
+            f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PASSWORD")}@{os.getenv("DB_HOST")}/{os.getenv("DATABASE")}'
         )
         data.to_sql(nome_tabela, engine, if_exists='replace', index=False)
         print('Dados inseridos na tabela com sucesso!')

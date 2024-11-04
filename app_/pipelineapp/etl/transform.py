@@ -3,6 +3,15 @@
 from datetime import datetime
 
 
+def selecionar_colunas(data, colunas):
+    """
+    Seleciona colunas de uma dataframe.
+    """
+    data = data[colunas]
+
+    return data
+
+
 def converter_para_datas(data, colunas, formato=None):
     """
     Converte colunas do tipo string para o tipo data.

@@ -3,9 +3,9 @@
 # RUN COMMAND ---
 # python pipelineapp/main.py
 
-from .etl.extract import ler_arquivo
-from .etl.load import conectar_db, inserir_dados_no_postgres
-from .etl.transform import converter_para_datas
+from etl.extract import ler_arquivo
+from etl.load import conectar_db, inserir_dados_no_postgres
+from etl.transform import selecionar_colunas, converter_para_datas
 
 
 def executar_pipeline():
@@ -13,12 +13,17 @@ def executar_pipeline():
     Executar o pipeline completo.
     """
     # ler arquivo
-    path = './data/Dados_Srag.csv'
+    path = './data/dados.csv'
     dados = ler_arquivo(path, separador=';')
+
+    # Selecionar colunas
+    lista_colunas = ['dataInicioSintomas', 'dataNotificacao', 'estadoIBGE', 'idade']
+
+    dados = selecionar_colunas(dados, lista_colunas)
 
     # converter colunas string para data
     dados = converter_para_datas(
-        dados, ['dt_sin_pri', 'dt_digita'], formato='%Y-%m-%d'
+        dados, ['dataInicioSintomas', 'dataNotificacao'], formato='%Y-%m-%d'
     )
 
     # Alterar nomes de colunas

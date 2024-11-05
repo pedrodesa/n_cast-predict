@@ -2,7 +2,8 @@
 
 import os
 from functools import wraps
-
+from datetime import datetime
+import pytz
 import psycopg2
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
@@ -49,13 +50,17 @@ def inserir_dados_no_postgres(conn, data, nome_tabela):
 
     conn.close(): Fecha a conexão.
     """
+
     try:
+        # Adiciona uma coluna de data e hora de inserção
+        data['data_insercao'] = datetime.now()
+
         engine = create_engine(
             f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PASSWORD")}@{os.getenv("DB_HOST")}/{os.getenv("DATABASE")}'
         )
+
         data.to_sql(nome_tabela, engine, if_exists='replace', index=False)
         print('Dados inseridos na tabela com sucesso!')
 
     except Exception as error:
-
         print(f'Erro ao inserir dados no PostgresSQL: {error}')

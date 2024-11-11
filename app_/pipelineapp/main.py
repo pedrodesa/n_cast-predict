@@ -43,5 +43,6 @@ def executar_pipeline():
         # Fechar a conexão
         conn.close()
 
+
 if __name__ == '__main__':
     executar_pipeline()

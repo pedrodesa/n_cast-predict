@@ -5,7 +5,7 @@
 
 from etl.extract import ler_arquivo
 from etl.load import conectar_db, inserir_dados_no_postgres
-from etl.transform import selecionar_colunas, converter_para_datas
+from etl.transform import selecionar_colunas, converter_para_datas, var_nome_minusculo
 
 
 def executar_pipeline():
@@ -16,14 +16,17 @@ def executar_pipeline():
     path = './data/dados.csv'
     dados = ler_arquivo(path, separador=';')
 
+    # Nomes para minúsculo
+    dados = var_nome_minusculo(dados)
+
     # Selecionar colunas
-    lista_colunas = ['dataInicioSintomas', 'dataNotificacao', 'estadoIBGE', 'idade']
+    lista_colunas = ['datainiciosintomas', 'datanotificacao', 'estadoibge', 'idade']
 
     dados = selecionar_colunas(dados, lista_colunas)
 
     # converter colunas string para data
     dados = converter_para_datas(
-        dados, ['dataInicioSintomas', 'dataNotificacao'], formato='%Y-%m-%d'
+        dados, ['datainiciosintomas', 'datanotificacao'], formato='%Y-%m-%d'
     )
 
     # Alterar nomes de colunas

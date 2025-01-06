@@ -3,6 +3,15 @@
 from datetime import datetime
 
 
+def var_nome_minusculo(data):
+    """
+    Altera os nomes das variáveis de maiúsculo para minúsculo.
+    """
+    data.columns = data.columns.str.lower()
+
+    return data
+
+
 def selecionar_colunas(data, colunas):
     """
     Seleciona colunas de uma dataframe.

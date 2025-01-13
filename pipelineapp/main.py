@@ -3,6 +3,8 @@
 # RUN COMMAND ---
 # python pipelineapp/main.py
 
+import os
+import glob
 import rpy2.robjects as robjects
 from etl.extract import ler_arquivo
 from etl.load import conectar_db, inserir_dados_no_postgres
@@ -12,20 +14,40 @@ from etl.transform import selecionar_colunas, converter_para_datas, var_nome_min
 # Run Rscript
 R_SCRIPT_PATH = './pipelineapp/etl/rdata2csv.r'
 robjects.r.source(R_SCRIPT_PATH)
+"""
+Executa o R script para alterar o formato do arquivo de Rdata para CSV.
+"""
 
 def executar_pipeline():
     """
     Executar o pipeline completo.
     """
     # ler arquivo
-    path = './data/dados.csv'
-    dados = ler_arquivo(path, separador=';')
+    
+    # Define o caminho do diretório
+    PATH_DIRECTORY = './data/output'
+    
+    # Verifica se o diretório existe
+    if os.path.exists(PATH_DIRECTORY):
+        # Encontra arquivos CSV no diretório
+        PATH_FILE_CSV = glob.glob(os.path.join(PATH_DIRECTORY, '*.csv'))
+        
+        if PATH_FILE_CSV:
+            # Le o primeiro arquivo CSV encontrado
+            dados = ler_arquivo(PATH_FILE_CSV[0], separador=';')
+        else:
+            print('Nenhum arquivo foi encontrado no diretório.')
+    else:
+        print(f'O diretório "{PATH_DIRECTORY}" não existe.')
 
     # Nomes para minúsculo
     dados = var_nome_minusculo(dados)
 
     # Selecionar colunas
-    lista_colunas = ['datainiciosintomas', 'datanotificacao', 'estadoibge', 'idade']
+    lista_colunas = ['datainiciosintomas', 
+                     'datanotificacao', 
+                     'estadoibge', 
+                     'idade']
 
     dados = selecionar_colunas(dados, lista_colunas)
 
@@ -33,13 +55,9 @@ def executar_pipeline():
     dados = converter_para_datas(
         dados, ['datainiciosintomas', 'datanotificacao'], formato='%Y-%m-%d'
     )
-
-    # Alterar nomes de colunas
-    # novos_nomes = {'co_mun_res': 'co_mun_res', 'co_mun_not': 'co_mun_not'}
-    # dados = renomear_colunas(dados, novos_nomes)
-
+    
     # Exportar dados para o PostgreSQL
-    nome_tabela = 'tb_covid'
+    nome_tabela = 'tb_esus_covid'
 
     # Conecta-se ao PostgreSQL
     conn = conectar_db()
@@ -50,7 +68,6 @@ def executar_pipeline():
 
         # Fechar a conexão
         conn.close()
-
 
 if __name__ == '__main__':
     executar_pipeline()

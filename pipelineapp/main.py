@@ -8,7 +8,11 @@ import glob
 import rpy2.robjects as robjects
 from etl.extract import ler_arquivo
 from etl.load import conectar_db, inserir_dados_no_postgres
-from etl.transform import selecionar_colunas, converter_para_datas, var_nome_minusculo
+from etl.transform import (
+    selecionar_colunas,
+    converter_para_datas,
+    var_nome_minusculo,
+)
 
 
 # Run Rscript
@@ -18,20 +22,21 @@ robjects.r.source(R_SCRIPT_PATH)
 Executa o R script para alterar o formato do arquivo de Rdata para CSV.
 """
 
+
 def executar_pipeline():
     """
     Executar o pipeline completo.
     """
     # ler arquivo
-    
+
     # Define o caminho do diretório
     PATH_DIRECTORY = './data/output'
-    
+
     # Verifica se o diretório existe
     if os.path.exists(PATH_DIRECTORY):
         # Encontra arquivos CSV no diretório
         PATH_FILE_CSV = glob.glob(os.path.join(PATH_DIRECTORY, '*.csv'))
-        
+
         if PATH_FILE_CSV:
             # Le o primeiro arquivo CSV encontrado
             dados = ler_arquivo(PATH_FILE_CSV[0], separador=';')
@@ -44,10 +49,12 @@ def executar_pipeline():
     dados = var_nome_minusculo(dados)
 
     # Selecionar colunas
-    lista_colunas = ['datainiciosintomas', 
-                     'datanotificacao', 
-                     'estadoibge', 
-                     'idade']
+    lista_colunas = [
+        'datainiciosintomas',
+        'datanotificacao',
+        'estadoibge',
+        'idade',
+    ]
 
     dados = selecionar_colunas(dados, lista_colunas)
 
@@ -55,7 +62,7 @@ def executar_pipeline():
     dados = converter_para_datas(
         dados, ['datainiciosintomas', 'datanotificacao'], formato='%Y-%m-%d'
     )
-    
+
     # Exportar dados para o PostgreSQL
     nome_tabela = 'tb_esus_covid'
 
@@ -68,6 +75,7 @@ def executar_pipeline():
 
         # Fechar a conexão
         conn.close()
+
 
 if __name__ == '__main__':
     executar_pipeline()

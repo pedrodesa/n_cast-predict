@@ -54,14 +54,14 @@ def inserir_dados_no_postgres(conn, data, nome_tabela):
 
     try:
         # Adiciona uma coluna de data e hora de inserção
-      #  data['data_insercao'] = datetime.now()
+        #  data['data_insercao'] = datetime.now()
 
         engine = create_engine(
             f'postgresql://{os.getenv("DB_USER")}:'
             f'{os.getenv("DB_PASSWORD")}@{os.getenv("DB_HOST")}:'
             f'{os.getenv("DB_PORT")}/{os.getenv("DATABASE")}'
         )
-        
+
         data.to_sql(nome_tabela, engine, if_exists='replace', index=False)
         print(f'Dados inseridos na tabela com sucesso!')
 

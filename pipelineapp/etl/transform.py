@@ -6,6 +6,9 @@ from datetime import datetime
 def var_nome_minusculo(data):
     """
     Altera os nomes das variáveis de maiúsculo para minúsculo.
+
+    Args:
+        data: pd.DataFrame
     """
     data.columns = data.columns.str.lower()
 
@@ -14,7 +17,11 @@ def var_nome_minusculo(data):
 
 def selecionar_colunas(data, colunas):
     """
-    Seleciona colunas de uma dataframe.
+    Seleciona colunas de um dataframe a partir de uma lista.
+
+    Args:
+        data: pd.DataFrame
+        colunas (list): lista com o nome das colunas
     """
     data = data[colunas]
 
@@ -40,7 +47,7 @@ def renomear_colunas(data, colunas):
     Renomeia uma ou mais colunas de um dataframe.
 
     Args:
-        df (pandas.DatFrame): pandas DatFrame.
+        data (pandas.DatFrame): pandas DatFrame.
         colunas (dict): Dicionário onde as chaves
         são as colunas atuais e os valores são os
         novos nomes.

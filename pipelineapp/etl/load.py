@@ -18,7 +18,7 @@ def acessar_dotenv(func):
     def wrapper(*args, **kwargs):
         load_dotenv()
         return func(*args, **kwargs)
-    
+
     return wrapper
 
 
@@ -51,21 +51,24 @@ def verificar_tabela_existe(engine, nome_tabela):
     """
     try:
         with engine.connect() as connection:
-            query = text(f"""
+            query = text(
+                f"""
                 SELECT EXISTS (
                          SELECT FROM information_schema.tables
                          WHERE table_name = '{nome_tabela}'
                          );
-                    """)
+                    """
+            )
             result = connection.execute(query)
             return result.scalar()
     except Exception as error:
         print(f'Erro ao verificar a existência da tabela: {error}')
         return False
-    
+
+
 def criar_tabela(engine, nome_tabela, data):
     """
-    Cria a tabela de dados no 
+    Cria a tabela de dados no
     """
     try:
         # Mapeia os tipos de dados do pandas para o PostgreSQL
@@ -74,7 +77,7 @@ def criar_tabela(engine, nome_tabela, data):
             'int64': 'INTEGER',
             'float64': 'FLOAT',
             'datetime64[ns]': 'TIMESTAMP',
-            'bool': 'BOOLEAN'
+            'bool': 'BOOLEAN',
         }
 
         # Gera o SQL para criar a tabela
@@ -104,7 +107,7 @@ def limpar_tabela(engine, nome_tabela):
     """
     try:
         with engine.connect() as connection:
-            connection.execute(text(f"TRUNCATE TABLE {nome_tabela};"))
+            connection.execute(text(f'TRUNCATE TABLE {nome_tabela};'))
             connection.commit()
             print(f'Dados da tabela {nome_tabela} foram limpos com sucesso!')
     except Exception as error:

@@ -3,8 +3,8 @@
 ## Objetivo
 Gerar predições de atrasos de registros de vigilância em saúde, para antecipação de eventos de interesse para a saúde pública.
 
-
-<img src="../relatorios/img/pipeline.png" width="200" height="100">
+![Pipeline](./relatorios/img/pipeline.png)
+<img src="relatorios/img/pipeline.png" width="200" height="100">
 
 
 ## Download do projeto

@@ -6,6 +6,8 @@ Gerar predições de atrasos de registros de vigilância em saúde, para antecip
 
 ![Pipeline](relatorios/img/pipeline.png)
 
+<img src="relatorios/img/pipeline.png" width="200" height="100">
+
 
 ## Download do projeto
 ```

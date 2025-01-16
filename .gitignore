@@ -1,5 +1,4 @@
-# Created by https://www.toptal.com/developers/gitignore/api/python,r
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,r
+# Arquivos .gitignore
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -236,4 +235,7 @@ data/
 # Pastas e documentos diversos
 referencias/
 
-# End of https://www.toptal.com/developers/gitignore/api/python,r
+# Enviroments variables
+config.yml
+
+# End

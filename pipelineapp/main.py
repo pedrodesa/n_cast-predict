@@ -5,6 +5,7 @@
 
 import glob
 import os
+import yaml
 
 import rpy2.robjects as robjects
 from etl.extract import ler_arquivo
@@ -12,8 +13,13 @@ from etl.load import conectar_db, inserir_dados_no_postgres
 from etl.transform import (converter_para_datas, selecionar_colunas,
                            var_nome_minusculo)
 
+
+with open('config.yml', 'r') as file:
+    config = yaml.safe_load(file)
+
+
 # Run Rscript
-R_SCRIPT_PATH = './pipelineapp/etl/rdata2csv.r'
+R_SCRIPT_PATH = config['paths']['r_script_path']
 robjects.r.source(R_SCRIPT_PATH)
 """
 Executa o R script para alterar o formato do arquivo de Rdata para CSV.
@@ -27,7 +33,7 @@ def executar_pipeline():
     # ler arquivo
 
     # Define o caminho do diretório
-    PATH_DIRECTORY = './data/output'
+    PATH_DIRECTORY = config['paths']['path_directory']
 
     # Verifica se o diretório existe
     if os.path.exists(PATH_DIRECTORY):

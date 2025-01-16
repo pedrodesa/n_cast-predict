@@ -4,7 +4,7 @@
 Gerar predições de atrasos de registros de vigilância em saúde, para antecipação de eventos de interesse para a saúde pública.
 
 
-<img src="/relatorios/img/pipeline.png" width="200" height="100">
+<img src="../relatorios/img/pipeline.png" width="200" height="100">
 
 
 ## Download do projeto

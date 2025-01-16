@@ -1,19 +1,21 @@
 """Módulo para inserir dados no banco de dados."""
 
 import os
-from functools import wraps
 from datetime import datetime
-import pytz
+from functools import wraps
+
+import pandas as pd
 import psycopg2
+import pytz
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
-import pandas as pd
 
 
 def acessar_dotenv(func):
     """
     Load arquivo dot env.
     """
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         load_dotenv()

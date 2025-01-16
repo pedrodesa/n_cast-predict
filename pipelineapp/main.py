@@ -3,17 +3,14 @@
 # RUN COMMAND ---
 # python pipelineapp/main.py
 
-import os
 import glob
+import os
+
 import rpy2.robjects as robjects
 from etl.extract import ler_arquivo
 from etl.load import conectar_db, inserir_dados_no_postgres
-from etl.transform import (
-    selecionar_colunas,
-    converter_para_datas,
-    var_nome_minusculo,
-)
-
+from etl.transform import (converter_para_datas, selecionar_colunas,
+                           var_nome_minusculo)
 
 # Run Rscript
 R_SCRIPT_PATH = './pipelineapp/etl/rdata2csv.r'

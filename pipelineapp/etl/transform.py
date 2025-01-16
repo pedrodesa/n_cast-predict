@@ -1,6 +1,9 @@
 """Módulo para transformar dados de variáveis."""
 
 from datetime import datetime
+from typing import List, Union
+
+import pandas as pd
 
 
 def var_nome_minusculo(data):
@@ -40,16 +43,3 @@ def converter_para_datas(data, colunas, formato=None):
         )
 
     return data
-
-
-def renomear_colunas(data, colunas):
-    """
-    Renomeia uma ou mais colunas de um dataframe.
-
-    Args:
-        data (pandas.DatFrame): pandas DatFrame.
-        colunas (dict): Dicionário onde as chaves
-        são as colunas atuais e os valores são os
-        novos nomes.
-    """
-    return data.rename(columns=colunas)

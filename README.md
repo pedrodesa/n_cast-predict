@@ -27,12 +27,5 @@ pip install -r requirements.txt
 
 ## Executar o pipeline
 ```
-python app_/pipelineapp/main.py
+python pipelineapp/main.py
 ```
-
-## Executar web app
-```
-uvicorn app_.app:app --reload
-```
-
-Para parar a execução do web app use Ctrl + C

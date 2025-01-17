@@ -18,6 +18,12 @@ create_dir <- function(path) {
   return(path)
 }
 
+# Função para deletar arquivos de um diretório
+clean_dir <- function(path) {
+  unlink(path)
+  message("Arquivos deletados")
+}
+
 # Função para processar um único arquivo
 process_file <- function(file_path, output_dir) {
   tryCatch({
@@ -76,6 +82,10 @@ main <- function() {
   # Define e cria diretórios
   data_dir <- "./data"
   output_dir <- create_dir(file.path(data_dir, "output"))
+  
+  if (dir.exists(output_dir)) {
+    clean_dir(file.path(output_dir, '*'))
+  }
   
   # Lista arquivos .RData
   files <- list.files(path = data_dir, 
